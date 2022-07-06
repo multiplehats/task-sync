@@ -20,4 +20,5 @@ jobs:
           NOTION_KEY: ${{secrets.NOTION_KEY}}
           NOTION_DATABASE_ID: ${{secrets.NOTION_DATABASE_ID}}
         run: |
-            yarn sync
+          yarn install --immutable --immutable-cache --check-cache
+          yarn sync
