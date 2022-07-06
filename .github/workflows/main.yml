@@ -1,0 +1,23 @@
+name: Sync
+
+on:
+  push:
+    branches:
+      - master
+  repository_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  index:
+    name: Sync projects between Todoist and Notion
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: run index
+        env:
+          TODOIST_KEY: ${{secrets.TODOIST_KEY}}
+          NOTION_KEY: ${{secrets.NOTION_KEY}}
+          NOTION_DATABASE_ID: ${{secrets.NOTION_DATABASE_ID}}
+        run: |
+            yarn sync
